@@ -1,38 +1,46 @@
-import { SignIn } from '@clerk/nextjs';
+"use client";
+
+import { SignIn } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+
+
 
 export default function Page() {
+  const [isClerkReady, setIsClerkReady] = useState(false);
+
+  useEffect(() => {
+    // simulate mount delay for Clerk
+    const timer = setTimeout(() => setIsClerkReady(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main className="w-full flex">
-      <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
-        <div className="relative z-10 w-full max-w-md">
-          <img src="https://static.naukimg.com/s/0/0/i/naukri-identity/naukri_gnb_logo.svg"  alt="Interview Ai Logo" className="rounded-full" />
-          <div className=" mt-16 space-y-3">
-            <h3 className="text-white text-3xl font-bold">Start a clearing you mock interviews</h3>
-            <p className="text-gray-300">
-              Create an account and get access to all features for 30-days, No credit card required.
-            </p>
-          </div>
+    <main className="w-full h-screen flex items-center justify-center bg-gray-900 relative overflow-hidden">
+
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-800 to-black animate-gradient opacity-80 "></div>
+
+      {/* Subtle dotted pattern overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.1)_1px,_transparent_1px)] bg-[length:24px_24px]"></div>
+
+      {/* Clerk SignIn Box */}
+      <div className="relative z-10 w-full max-w-md px-6 py-10 bg-gray-900 border border-gray-800 shadow-2xl rounded-2xl">
+        <div className="text-center mb-6">
+          <img src="/logo.png" alt="App Logo" className="mx-auto h-16 w-auto" />
+          <h3 className="text-white text-2xl font-bold mt-4">Sign In</h3>
+          <p className="text-gray-500 text-sm">Access your mock interview dashboard</p>
         </div>
-        <div
-          className="absolute inset-0 my-auto h-[500px]"
-          style={{
-            background: "linear-gradient(152.92deg, rgba(192, 132, 252, 0.2) 4.54%, rgba(232, 121, 249, 0.26) 34.2%, rgba(192, 132, 252, 0.1) 77.55%)",
-            filter: "blur(118px)",
+        <SignIn
+          appearance={{
+            elements: {
+              rootBox: "w-full",
+              card: "shadow-none",
+            },
           }}
-        ></div>
-      </div>
-      <div className="flex-1 flex items-center justify-center h-screen">
-        <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-          <div className="">
-            <img src="https://floatui.com/logo.svg" width={150} className="lg:hidden" alt="Float UI Logo" />
-            <div className="mt-5 space-y-2">
-              <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Sign up</h3>
-              <SignIn />
-            </div>
-          </div>
-          
-        </div>
+        />
       </div>
     </main>
+
+
   );
 }

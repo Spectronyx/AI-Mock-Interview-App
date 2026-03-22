@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.31.4",
+    "@clerk/themes": "^2.4.15",
     "@google/genai": "^1.15.0",
     "@google/generative-ai": "^0.24.1",
     "@neondatabase/serverless": "^1.0.1",

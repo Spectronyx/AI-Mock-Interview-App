@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -119,4 +120,53 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+/* Gradient shift */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
+}
+
+/* Fade in content */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Slow bounce (logo) */
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-bounceSlow {
+  animation: bounceSlow 3s infinite;
+}
+
+/* Floating particles */
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  animation: float 10s linear infinite;
+}
+.particle:nth-child(1) { top: 20%; left: 15%; animation-duration: 12s; }
+.particle:nth-child(2) { top: 40%; left: 70%; animation-duration: 15s; }
+.particle:nth-child(3) { top: 75%; left: 30%; animation-duration: 18s; }
+.particle:nth-child(4) { top: 60%; left: 85%; animation-duration: 20s; }
+.particle:nth-child(5) { top: 10%; left: 50%; animation-duration: 22s; }
+
+@keyframes float {
+  0% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-40px) scale(1.2); opacity: 0.9; }
+  100% { transform: translateY(0) scale(1); opacity: 0.5; }
 }
